@@ -1,6 +1,9 @@
-const Cart = ({ cart, total, onCheckout }) => {
-  return (
-    <div className="bg-white rounded-lg shadow p-6">
+
+export default function Cart({cart, total, onCheckout}){
+
+  return(
+    <>
+      <div className="bg-white rounded-lg shadow p-6">
       <span className="material-symbols-outlined">shopping_cart</span>
       <div className="space-y-2">
         {cart.map((item) => (
@@ -32,6 +35,6 @@ const Cart = ({ cart, total, onCheckout }) => {
         Checkout
       </button>
     </div>
-  );
-};
-export default Cart;
+    </>
+  )
+}

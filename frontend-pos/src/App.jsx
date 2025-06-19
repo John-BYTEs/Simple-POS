@@ -4,10 +4,9 @@ import ProductList from "./components/ProductList";
 import Cart from "./components/Cart";
 import ReceiptModal from "./components/ReceiptModal";
 import "./App.css";
-import Modal from "react-modal";
 import * as Sentry from "@sentry/react";
+import PrintReceipt  from "./components/PrintReceipt";
 
-Modal.setAppElement("#root");
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -44,9 +43,7 @@ const App = () => {
     });
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
+
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -63,7 +60,7 @@ const App = () => {
         onClose={() => setShowModal(false)}
         cart={cart}
         total={total}
-        onPrint={handlePrint}
+        onPrint={PrintReceipt}
       />
       </div>
     </Sentry.ErrorBoundary>
