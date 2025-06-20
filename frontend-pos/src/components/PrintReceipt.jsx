@@ -5,11 +5,10 @@ const PrintReceipt = () => {
   document.body.innerHTML = `
             <html>
       <head>
-        <title>Receipt</title>
         <style>
           body {
             font-family: Arial, sans-serif;
-            padding: 20px;
+            padding: 50px;
             color: #333;
           }
           .receipt-header {
@@ -31,7 +30,6 @@ const PrintReceipt = () => {
         </style>
         </head>
         <body>
-        <div class="receipt-header">Receipt</div>
         ${printReceipt}
       </body>
     </html>

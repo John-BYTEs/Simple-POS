@@ -6,6 +6,7 @@ import ReceiptModal from "./components/ReceiptModal";
 import "./App.css";
 import * as Sentry from "@sentry/react";
 import PrintReceipt from "./components/PrintReceipt";
+import Header from "./components/Layout/Header";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -63,7 +64,8 @@ const App = () => {
   return (
     <>
       <Sentry.ErrorBoundary fallback={"Something went wrong!"}>
-        <div className="min-h-screen p-6 bg-gray-200 font-mono">
+        <Header />
+        <div className="min-h-screen pt-10 bg-gray-200 font-mono">
           <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6">
             <ProductList
               products={products}

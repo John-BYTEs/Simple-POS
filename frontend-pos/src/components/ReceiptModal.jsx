@@ -11,8 +11,18 @@ export default function ReceiptModal({isOpen, onClose, cart, total, onPrint}){
     overlayClassName="fixed inset-0 bg-opacity-10 backdrop-blur-xs flex justify-center items-start"
   >
     <div className="bg-white rounded">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4 pl-5 pt-4">Receipt</h2>
-    <div id="receipt" className="space-y-2 p-5">
+      
+      <div id="receipt">
+        <div className="grid grid-cols-2 pt-4 m-2">
+        <div>
+          <h1 className="text-xl font-semibold text-gray-800 mb-4 text-start pl-5">Simple POS</h1>
+        </div>
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 text-end pr-5">Receipt</h2>
+        </div>
+      </div>
+      
+    <div className="space-y-2 p-5">
       {cart.map((item) => (
         <div key={item.id} className="flex justify-between pl-7">
           <span>{item.name} x {item.quantity}</span>
@@ -25,6 +35,7 @@ export default function ReceiptModal({isOpen, onClose, cart, total, onPrint}){
         <span>₱{total.toFixed(2)}</span>
       </div>
     </div>
+      </div>
 
     <div className="mt-6 flex justify-between p-5">
       <button
