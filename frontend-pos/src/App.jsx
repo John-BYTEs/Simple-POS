@@ -5,8 +5,7 @@ import Cart from "./components/Cart";
 import ReceiptModal from "./components/ReceiptModal";
 import "./App.css";
 import * as Sentry from "@sentry/react";
-import PrintReceipt  from "./components/PrintReceipt";
-
+import PrintReceipt from "./components/PrintReceipt";
 
 const App = () => {
   const [products, setProducts] = useState([]);
@@ -14,14 +13,25 @@ const App = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/products").then((res) => setProducts(res.data));
+    axios
+      .get("http://localhost:8000/api/products")
+      .then((res) => setProducts(res.data));
   }, []);
 
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
+    const stockAvailable = product.stock - (existing?.quantity || 0);
+
+    if (stockAvailable <= 0) return;
+
     if (existing) {
-      setCart(cart.map((item) => item.id === product.id
-        ? { ...item, quantity: item.quantity + 1 } : item));
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+      );
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
@@ -29,11 +39,16 @@ const App = () => {
 
   const subToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
-    if (existing) {
-      setCart(cart.map((item) => item.id === product.id
-        ? { ...item, quantity: item.quantity - 1 } : item));
+    if (!existing || existing.quantity <= 1) {
+      setCart(cart.filter((item) => item.id !== product.id));
     } else {
-      setCart([...cart, { ...product, quantity: 1 }]);
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+      );
     }
   };
 
@@ -43,27 +58,34 @@ const App = () => {
     });
   };
 
-
-
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <>
-    <Sentry.ErrorBoundary fallback={"Something went wrong!"}>
-      <div className="min-h-screen p-6 bg-gray-200 font-mono">
-      <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6">
-        <ProductList products={products} onAdd={addToCart} onSub={subToCart} />
-        <Cart cart={cart} total={total} onCheckout={handleSubmit} />
-      </div>
-      <ReceiptModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
-        cart={cart}
-        total={total}
-        onPrint={PrintReceipt}
-      />
-      </div>
-    </Sentry.ErrorBoundary>
+      <Sentry.ErrorBoundary fallback={"Something went wrong!"}>
+        <div className="min-h-screen p-6 bg-gray-200 font-mono">
+          <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6">
+            <ProductList
+              products={products}
+              onAdd={addToCart}
+              onSub={subToCart}
+            />
+            <Cart
+              products={products}
+              cart={cart}
+              total={total}
+              onCheckout={handleSubmit}
+            />
+          </div>
+          <ReceiptModal
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+            cart={cart}
+            total={total}
+            onPrint={PrintReceipt}
+          />
+        </div>
+      </Sentry.ErrorBoundary>
     </>
   );
 };

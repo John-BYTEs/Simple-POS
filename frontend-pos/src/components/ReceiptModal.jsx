@@ -7,7 +7,7 @@ export default function ReceiptModal({isOpen, onClose, cart, total, onPrint}){
       <Modal
     isOpen={isOpen}
     onRequestClose={onClose}
-    className="m-10 bg-blue-500 p-6 w-[50%]"
+    className="m-10 bg-blue-900 p-6 w-[50%] rounded-lg"
     overlayClassName="fixed inset-0 bg-opacity-10 backdrop-blur-xs flex justify-center items-start"
   >
     <div className="bg-white rounded">
@@ -29,13 +29,13 @@ export default function ReceiptModal({isOpen, onClose, cart, total, onPrint}){
     <div className="mt-6 flex justify-between p-5">
       <button
         onClick={onPrint}
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="px-4 py-2 bg-blue-700 text-white rounded hover:bg-blue-800"
       >
         Print
       </button>
       <button
         onClick={onClose}
-        className="px-4 py-2 bg-red-800 text-white rounded hover:bg-red-700"
+        className="px-4 py-2 bg-red-700 text-white rounded hover:bg-red-800"
       >
         Close
       </button>

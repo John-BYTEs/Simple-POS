@@ -24,6 +24,7 @@ class POSController extends Controller
             'items.*.name' => 'required|string',
             'items.*.quantity' => 'required|integer',
             'items.*.price' => 'required|integer',
+            'items.*.stock' => 'required|integer'
         ]);
 
         $total = collect($request->items)->sum(function ($item) {
@@ -40,6 +41,18 @@ class POSController extends Controller
                 'quantity' => $item['quantity'],
                 'price' => $item['price'],
             ]);
+        }
+
+        foreach ($request->items as $item) {
+            $product = Product::findOrFail($item['id']);
+
+            if ($product->stock < $item['quantity']) {
+                return response()->json([
+                    'error' => 'Not enough stock for ' . $product->name
+                ], 400);
+            }
+            $product->stock -= $item['quantity'];
+            $product->save();
         }
 
         return response()->json(['message' => 'Sale saved successfully', 'sale_id' => $sale->id]);
