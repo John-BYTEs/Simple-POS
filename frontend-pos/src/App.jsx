@@ -7,11 +7,12 @@ import "./App.css";
 import * as Sentry from "@sentry/react";
 import PrintReceipt from "./components/PrintReceipt";
 import Header from "./components/Layout/Header";
+import ConfirmModal from "./components/ConfirmModal";
 
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     axios
@@ -54,10 +55,9 @@ const App = () => {
   };
 
   const handleSubmit = () => {
-    axios.post("http://localhost:8000/api/sales", { items: cart }).then(() => {
-      setShowModal(true);
-    });
+   setShowConfirm(true);
   };
+
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -79,13 +79,7 @@ const App = () => {
               onCheckout={handleSubmit}
             />
           </div>
-          <ReceiptModal
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
-            cart={cart}
-            total={total}
-            onPrint={PrintReceipt}
-          />
+          <ConfirmModal isOpen={showConfirm} onClose={() => {setShowConfirm(false)}} cart={cart} total={total} onPrint={PrintReceipt}/>
         </div>
       </Sentry.ErrorBoundary>
     </>

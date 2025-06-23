@@ -2,7 +2,7 @@
 export default function ProductCard({product, onAdd, onSub}) {
   return (
     <>
-      <div className="rounded-lg p-4 shadow-xl bg-amber-50 hover:shadow-md transition grid grid-rows4">
+      <div className="rounded-lg p-4 shadow-xl bg-amber-50 hover:bg-blue-100 transition grid grid-rows4">
 
         <div className="row-span-3">
           <p className="text-lg font-medium text-gray-800">
