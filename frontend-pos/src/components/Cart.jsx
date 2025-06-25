@@ -38,9 +38,9 @@ export default function Cart({ cart, total, onCheckout }) {
               onCheckout();
             }
           }}
-          className="mt-6 w-full bg-cyan-400 text-white py-2 rounded hover:bg-cyan-500"
+          className="mt-6 w-full bg-cyan-400 text-white py-2 rounded hover:bg-cyan-500 font-bold"
         >
-          Checkout
+          CHECKOUT
         </button>
       </div>
     </>

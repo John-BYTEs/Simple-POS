@@ -7,7 +7,7 @@ export default function ReceiptModal({isOpen, onClose, cart, total, onPrint}){
       <Modal
     isOpen={isOpen}
     onRequestClose={onClose}
-    className="m-10 bg-blue-900 p-6 w-[50%] rounded-lg"
+    className="m-10 bg-blue-600 p-6 w-[50%] rounded-lg"
     overlayClassName="fixed inset-0 bg-opacity-10 backdrop-blur-xs flex justify-center items-start"
   >
     <div className="bg-white rounded">
