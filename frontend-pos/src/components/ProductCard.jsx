@@ -26,14 +26,14 @@ export default function ProductCard({product, onAdd, onSub}) {
           <button
           disabled={product.stock <= 0}
           onClick={() => onAdd(product)}
-          className="mt-3 px-3 pt-1 bg-green-500 text-white text-sm rounded-full hover:bg-green-600 mr-1"
+          className="mt-3 px-3 pt-1 bg-cyan-500 text-white text-sm rounded-full hover:bg-cyan-400 mr-1"
         >
           <span className="material-symbols-outlined">add</span>
         </button>
 
         <button
           onClick={() => onSub(product)}
-          className="mt-3 px-3 pt-1 bg-red-500 text-white text-sm rounded-full hover:bg-red-600"
+          className="mt-3 px-3 pt-1 bg-cyan-600 text-white text-sm rounded-full hover:bg-cyan-500"
         >
           <span className="material-symbols-outlined">remove</span>
         </button>

@@ -1,12 +1,12 @@
 body{
-    background-color: rgba(24, 25, 26);
+    background-color: rgba(13, 15, 24);
 }
 
 .server {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #1e1e1e;
+    background-color: rgba(15, 20, 35);
     color: limegreen;
     font-family: monospace;
     margin-top: 250px;

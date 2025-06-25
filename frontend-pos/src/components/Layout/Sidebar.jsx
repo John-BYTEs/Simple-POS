@@ -4,7 +4,7 @@ export default function Sidebar({ isOpen, isClose }) {
   return (
     <>
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-orange-700 text-white font-mono p-6 z-40 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-cyan-400 text-white font-mono p-6 z-40 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >

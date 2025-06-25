@@ -18,7 +18,7 @@ export default function ConfirmModal({ isOpen, onClose, cart, total}) {
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
-        className="m-10 mt-50 bg-orange-400 p-6 w-[40%] rounded-lg border-0 outline-0 shadow-sm"
+        className="m-10 mt-64 bg-orange-400 p-6 w-[40%] rounded-lg border-0 outline-0 shadow-sm transition-all duration-100 transform -translate-y-2"
         overlayClassName="fixed inset-0 bg-opacity-10 backdrop-blur-xs flex justify-center items-start"
       >
         <div className=" grid grid-rows-2 font-mono">

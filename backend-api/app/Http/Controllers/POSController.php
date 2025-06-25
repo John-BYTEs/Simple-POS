@@ -63,7 +63,7 @@ class POSController extends Controller
 
 
     public function show(){
-        $server = "Server is Running!";
+        $server = "200 : Server is Running!";
         return view('server', compact('server'));
     }
 }
