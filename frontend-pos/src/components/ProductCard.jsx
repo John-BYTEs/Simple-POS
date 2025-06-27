@@ -20,6 +20,7 @@ export default function ProductCard({product, onAdd, onSub}) {
           <p>
           Stocks: <span className="text-orange-500">{product.stock}</span>
         </p>
+        
         </div>
 
         <div className="row-span-3">
@@ -38,7 +39,7 @@ export default function ProductCard({product, onAdd, onSub}) {
           <span className="material-symbols-outlined">remove</span>
         </button>
         </div>
-
+        {console.log("Rendering product:", product.name, "Stock:", product.stock)}
       </div>
     </>
   );

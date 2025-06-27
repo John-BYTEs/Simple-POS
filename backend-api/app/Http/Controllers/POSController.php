@@ -66,4 +66,14 @@ class POSController extends Controller
         $server = "200 : Server is Running!";
         return view('server', compact('server'));
     }
+
+    public function storeStock(Request $request){
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|integer',
+            'stock' => 'required|integer'
+        ]);
+
+        Product::create($validated);
+    }
 }

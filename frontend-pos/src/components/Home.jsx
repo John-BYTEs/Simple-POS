@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+
 import ProductList from "./ProductList";
 import Cart from "./Cart";
 import "../App.css";
 import * as Sentry from "@sentry/react";
 import PrintReceipt from "./PrintReceipt";
-import Header from "./Layout/Header";
 import ConfirmModal from "./ConfirmModal";
+import api from "./axiosAPI/axiosapi";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -15,9 +15,13 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    fetchStocks();
+  }, []);
+
+  const fetchStocks = () => {
     setLoading(true);
-    axios
-      .get("http://localhost:8000/api/products")
+    api
+      .get("/products")
       .then((res) => {
         setProducts(res.data);
         setTimeout(() => {
@@ -28,7 +32,7 @@ const Home = () => {
         console.error("Error fetching products:", error);
         setLoading(false);
       });
-  }, []);
+  };
 
   const addToCart = (product) => {
     const existing = cart.find((item) => item.id === product.id);
@@ -75,7 +79,7 @@ const Home = () => {
       <Sentry.ErrorBoundary fallback={"Something went wrong!"}>
         {loading ? (
           <div className="flex justify-center items-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-cyan-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-cyan-100 border-t-transparent"></div>
           </div>
         ) : (
           <div className="pt-10 font-mono grid grid-cols-1">
@@ -97,9 +101,12 @@ const Home = () => {
               onClose={() => {
                 setShowConfirm(false);
               }}
+              setCart={setCart}
+              setTotal={total}
               cart={cart}
               total={total}
               onPrint={PrintReceipt}
+              fetchStocks={fetchStocks}
             />
           </div>
         )}

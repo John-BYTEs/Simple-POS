@@ -2,22 +2,28 @@ import { useState } from "react";
 import Modal from "react-modal";
 import ReceiptModal from "./ReceiptModal";
 import PrintReceipt from "./PrintReceipt";
-import axios from "axios";
+import api from "./axiosAPI/axiosapi";
 
-export default function ConfirmModal({ isOpen, onClose, cart, total}) {
+export default function ConfirmModal({ isOpen, onClose, cart, total, setCart, setTotal, fetchStocks}) {
   const [showModal, setShowModal] = useState(false);
 
   const confirmOrder = () => {
-    axios.post("http://localhost:8000/api/sales", { items: cart }).then(() => {
+    api.post("/sales", { items: cart }).then(() => {
       setShowModal(true);
+      onClose();
     });
   };
+
+  const handleReceiptClose = () => {
+  setShowModal(false);
+  setCart([]);
+  fetchStocks();
+};
 
   return (
     <>
       <Modal
         isOpen={isOpen}
-        onRequestClose={onClose}
         className="m-10 mt-64 bg-cyan-400 p-6 w-[40%] rounded-lg border-0 outline-0 shadow-sm transition-all duration-100 transform -translate-y-2"
         overlayClassName="fixed inset-0 bg-opacity-10 backdrop-blur-xs flex justify-center items-start"
       >
@@ -34,14 +40,14 @@ export default function ConfirmModal({ isOpen, onClose, cart, total}) {
             </div>
           </div>
         </div>
-        <ReceiptModal
+      </Modal>
+      <ReceiptModal
           isOpen={showModal}
-          onClose={() => setShowModal(false)}
+          onClose={handleReceiptClose}
           cart={cart}
           total={total}
           onPrint={PrintReceipt}
         />
-      </Modal>
     </>
   );
 }

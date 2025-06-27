@@ -8,7 +8,7 @@ export default function ProductList({products, onAdd, onSub}) {
         <div className="grid grid-cols-3 gap-4">
           {products.map((product) => (
             <ProductCard
-              key={product.id}
+              key={`${product.id}-${product.stock}`}
               product={product}
               onAdd={onAdd}
               onSub={onSub}
