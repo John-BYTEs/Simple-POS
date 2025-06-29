@@ -17,7 +17,7 @@ export default function Sidebar({ isOpen, isClose }) {
             <span className="material-symbols-outlined w-full">arrow_back</span>
           </button>
 
-          <NavLink to="/">
+          <NavLink to="/" onClick={isClose}>
             {({ isActive }) => (
               <div
                 className={`grid grid-cols-6 items-center gap-2 p-2 ${
@@ -34,7 +34,7 @@ export default function Sidebar({ isOpen, isClose }) {
 
           <hr className="my-2 opacity-0" />
 
-          <NavLink to="/stocks">
+          <NavLink to="/stocks" onClick={isClose}>
             {({ isActive }) => (
               <div
                 className={`grid grid-cols-6 items-center gap-2 p-2 ${
@@ -48,7 +48,7 @@ export default function Sidebar({ isOpen, isClose }) {
               </div>
             )}
           </NavLink>
-          <NavLink to="/transactions">
+          <NavLink to="/transactions" onClick={isClose}>
             {({ isActive }) => (
               <div
                 className={`grid grid-cols-6 items-center gap-2 p-2 ${

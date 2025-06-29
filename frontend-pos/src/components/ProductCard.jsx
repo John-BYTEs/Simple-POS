@@ -6,7 +6,7 @@ export default function ProductCard({product, onAdd, onSub}) {
 
         <div className="row-span-3">
           <p className="text-lg font-medium text-gray-800">
-          Item: <span className="text-blue-900 font-extrabold">{product.name}</span>
+          Item: <span className="text-blue-900 font-extrabold text-xs">{product.name}</span>
         </p>
         </div>
 

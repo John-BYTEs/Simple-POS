@@ -83,7 +83,7 @@ const Home = () => {
           </div>
         ) : (
           <div className="pt-10 font-mono grid grid-cols-1">
-            <div className="max-w-6xl mx-auto grid grid-cols-3 gap-6">
+            <div className="mx-auto mt-15 grid grid-cols-3 gap-6">
               <ProductList
                 products={products}
                 onAdd={addToCart}
